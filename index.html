@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrunchie Love - ร้านยางรัดผม</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
+        
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // !!! สำคัญ: ใส่ Public Key ของคุณตรงนี้ !!!
+        (function(){
+            emailjs.init({ publicKey: "YOUR_PUBLIC_KEY" });
+        })();
+    </script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="text-gray-700">
+
+    <header class="bg-pink-800 shadow-md sticky top-0 z-40 text-white">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img id="shop-logo-display" src="" alt="Shop Logo" class="h-9 w-9 mr-3">
+                <h1 id="shop-name-display" class="text-2xl font-bold">Scrunchie Love</h1>
+            </div>
+            <div id="shop-contact-info" class="hidden md:flex items-center space-x-4 text-sm text-pink-100">
+                </div>
+            <div class="flex items-center space-x-4">
+                 <div id="admin-nav-links" class="hidden items-center space-x-4 text-sm">
+                    <a href="#" id="orders-report-link" class="text-pink-100 hover:text-white transition">รายการสั่งซื้อ</a>
+                    <a href="#" id="admin-products-link" class="text-pink-100 hover:text-white transition">จัดการร้านค้า</a>
+                    <a href="#" id="logout-link" class="text-pink-100 hover:text-white transition">ออกจากระบบ</a>
+                 </div>
+                 <a href="#" id="login-link" class="text-sm hover:text-pink-200 transition">ผู้ดูแลระบบ</a>
+                <button id="cart-button" class="relative hover:text-pink-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-pink-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div id="products-page">
+            <div id="hero-banner" class="w-full h-[50vh] bg-cover bg-center rounded-lg mb-8 shadow-lg">
+                <div class="flex items-center justify-center h-full bg-black bg-opacity-25 rounded-lg">
+                    <div class="text-center">
+                        <h2 id="banner-title" class="text-white text-3xl md:text-5xl font-bold drop-shadow-lg"></h2>
+                        <p id="banner-subtitle" class="text-white text-lg md:text-xl mt-4 drop-shadow-md"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-pink-100 text-pink-800 py-2 overflow-hidden whitespace-nowrap mb-8 shadow-inner rounded-lg">
+                <p id="marquee-text" class="animate-marquee"></p>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">สินค้าของเรา</h2>
+            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                </div>
+        </div>
+
+        <div id="admin-page" class="hidden">
+             <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">ข้อมูลร้านค้าและ Banner</h3>
+                <form id="shop-settings-form">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 border-b pb-6 mb-6">
+                        <div class="md:col-span-2 space-y-4">
+                            <div>
+                                <label for="shop-name-input" class="block text-sm font-medium text-gray-700">ชื่อร้านค้า</label>
+                                <input type="text" id="shop-name-input" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500">
+                            </div>
+                            <div>
+                                <label for="line-id-input" class="block text-sm font-medium text-gray-700">Line ID</label>
+                                <input type="text" id="line-id-input" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500">
+                            </div>
+                            <div>
+                                <label for="shop-phone-input" class="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์ร้าน</label>
+                                <input type="text" id="shop-phone-input" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                             <label class="block text-sm font-medium text-gray-700">โลโก้ร้านค้า</label>
+                             <img id="logo-preview" src="#" alt="ตัวอย่างโลโก้" class="rounded-full w-24 h-24 object-cover border-2 border-gray-200 mx-auto">
+                             <input type="file" id="shop-logo-input" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100" accept="image/*">
+                        </div>
+                    </div>
+                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 border-b pb-6 mb-6">
+                        <div class="md:col-span-2 space-y-4">
+                            <h4 class="text-md font-semibold text-gray-700 col-span-full">ตั้งค่า Banner</h4>
+                            <div>
+                                <label for="banner-title-input" class="block text-sm font-medium text-gray-700">หัวข้อ Banner</label>
+                                <input type="text" id="banner-title-input" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500">
+                            </div>
+                            <div>
+                                <label for="banner-subtitle-input" class="block text-sm font-medium text-gray-700">คำอธิบายย่อย Banner</label>
+                                <input type="text" id="banner-subtitle-input" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                             <label class="block text-sm font-medium text-gray-700">รูปภาพ Banner</label>
+                             <img id="banner-preview" src="#" alt="ตัวอย่าง Banner" class="w-full h-32 object-cover border-2 border-gray-200 rounded-md">
+                             <input type="file" id="shop-banner-input" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100" accept="image/*">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="marquee-text-input" class="block text-sm font-medium text-gray-700">ข้อความวิ่ง</label>
+                        <input type="text" id="marquee-text-input" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500">
+                    </div>
+                    <button type="submit" class="w-full sm:w-auto bg-pink-500 text-white font-bold py-2 px-6 rounded-md hover:bg-pink-600 transition">บันทึกข้อมูลทั้งหมด</button>
+                </form>
+            </div>
+
+            <h2 class="text-3xl font-bold text-gray-800 my-6">จัดการสินค้า</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <h3 id="form-title" class="text-xl font-semibold mb-4">เพิ่มสินค้าใหม่</h3>
+                <form id="add-product-form" class="space-y-4">
+                    <input type="hidden" id="edit-product-id">
+                    <div>
+                        <label for="product-name" class="block text-sm font-medium text-gray-700">ชื่อสินค้า</label>
+                        <input type="text" id="product-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500" required>
+                    </div>
+                    <div>
+                        <label for="product-price" class="block text-sm font-medium text-gray-700">ราคา (บาท)</label>
+                        <input type="number" id="product-price" min="0" step="1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500" required>
+                    </div>
+                    <div>
+                        <label for="product-stock" class="block text-sm font-medium text-gray-700">จำนวนสินค้าในสต็อก</label>
+                        <input type="number" id="product-stock" min="0" step="1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500" required>
+                    </div>
+                    <div>
+                        <label for="product-image" class="block text-sm font-medium text-gray-700">รูปภาพสินค้า</label>
+                        <input type="file" id="product-image" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100" accept="image/*">
+                        <img id="image-preview" src="#" alt="ตัวอย่างรูปภาพ" class="mt-4 rounded-md w-32 h-32 object-cover hidden">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button type="submit" class="w-full bg-pink-500 text-white font-bold py-2 px-4 rounded-md hover:bg-pink-600 transition">เพิ่มสินค้า</button>
+                        <button type="button" id="cancel-edit-btn" class="w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-md hover:bg-gray-300 transition hidden">ยกเลิก</button>
+                    </div>
+                </form>
+            </div>
+             <a href="#" id="back-to-shop-link" class="text-pink-600 hover:underline mb-4 inline-block">&larr; กลับไปหน้าร้านค้า</a>
+             <div class="mt-8">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">รายการสินค้าทั้งหมด</h3>
+                <div id="admin-product-list" class="space-y-3">
+                    </div>
+             </div>
+        </div>
+
+        <div id="orders-report-page" class="hidden">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">รายงานการสั่งซื้อ</h2>
+            <div id="orders-list" class="space-y-6">
+                </div>
+        </div>
+
+        <div id="checkout-page" class="hidden max-w-2xl mx-auto">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">ข้อมูลการจัดส่ง</h2>
+                <form id="checkout-form" class="space-y-4">
+                    <div>
+                        <label for="customer-name" class="block text-sm font-medium text-gray-700">ชื่อ-นามสกุล</label>
+                        <input type="text" id="customer-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500" required>
+                    </div>
+                    <div>
+                        <label for="customer-address" class="block text-sm font-medium text-gray-700">ที่อยู่</label>
+                        <textarea id="customer-address" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500" required></textarea>
+                    </div>
+                    <div>
+                        <label for="customer-phone" class="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
+                        <input type="tel" id="customer-phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500" required>
+                    </div>
+                    <button type="submit" class="w-full bg-pink-600 text-white font-bold py-3 px-4 rounded-md hover:bg-pink-700 transition text-lg">ยืนยันการสั่งซื้อ</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="confirmation-page" class="hidden text-center max-w-lg mx-auto">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">ขอบคุณสำหรับคำสั่งซื้อ!</h2>
+                <p class="text-gray-600 mb-4">เราได้รับคำสั่งซื้อของคุณเรียบร้อยแล้ว</p>
+                <p class="text-lg font-semibold text-gray-700">หมายเลขคำสั่งซื้อของคุณคือ:</p>
+                <p id="order-number" class="text-2xl font-bold text-pink-600 my-2 bg-pink-50 p-3 rounded-md inline-block"></p>
+                <p class="text-sm text-gray-500 mt-4">เราได้ส่งรายละเอียดการสั่งซื้อไปยังอีเมลผู้ขายแล้ว</p>
+                <button id="back-to-home-btn" class="mt-6 bg-pink-600 text-white font-bold py-2 px-6 rounded-md hover:bg-pink-700 transition">กลับสู่หน้าหลัก</button>
+            </div>
+        </div>
+    </main>
+
+    <div id="cart-modal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden opacity-0 z-50">
+        <div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-lg p-6 transform scale-95">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-gray-800">ตะกร้าสินค้า</h3>
+                <button id="close-cart-modal-button" class="text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <div id="cart-items" class="max-h-64 overflow-y-auto pr-2">
+                </div>
+            <div class="mt-4 pt-4 border-t">
+                <div class="flex justify-between items-center font-bold text-lg">
+                    <span>ยอดรวม:</span>
+                    <span id="cart-total" class="text-pink-600">฿0</span>
+                </div>
+                <button id="checkout-btn" class="mt-4 w-full bg-pink-600 text-white font-bold py-2 px-4 rounded-md hover:bg-pink-700 transition">ดำเนินการต่อ</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="login-modal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden opacity-0 z-50">
+        <div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-sm p-6 transform scale-95">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">ผู้ดูแลระบบ</h3>
+                <button id="close-login-modal-button" class="text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-gray-700">อีเมล</label>
+                    <input type="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-gray-700">รหัสผ่าน</label>
+                    <input type="password" id="password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500" required>
+                </div>
+                <p id="login-error" class="text-red-500 text-sm mb-4 hidden">อีเมลหรือรหัสผ่านไม่ถูกต้อง</p>
+                <button type="submit" class="w-full bg-pink-600 text-white font-bold py-2 px-4 rounded-md hover:bg-pink-700 transition">เข้าสู่ระบบ</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="info-modal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden opacity-0 z-50">
+        <div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-sm p-6 transform scale-95 text-center">
+            <h3 id="info-modal-title" class="text-xl font-bold text-gray-800 mb-4"></h3>
+            <p id="info-modal-message" class="text-gray-600 mb-6"></p>
+            <div id="info-modal-buttons" class="flex justify-center space-x-3">
+                </div>
+        </div>
+    </div>
+
+    <div id="edit-order-modal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden opacity-0 z-50">
+        <div class="modal-content bg-white rounded-lg shadow-xl w-11/12 max-w-md p-6 transform scale-95">
+             <h3 class="text-xl font-bold text-gray-800 mb-4">แก้ไขข้อมูลผู้รับ</h3>
+             <form id="edit-order-form">
+                <input type="hidden" id="edit-order-id">
+                <div class="space-y-4">
+                    <div>
+                        <label for="edit-customer-name" class="block text-sm font-medium text-gray-700">ชื่อ-นามสกุล</label>
+                        <input type="text" id="edit-customer-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500" required>
+                    </div>
+                    <div>
+                        <label for="edit-customer-address" class="block text-sm font-medium text-gray-700">ที่อยู่</label>
+                        <textarea id="edit-customer-address" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500" required></textarea>
+                    </div>
+                    <div>
+                        <label for="edit-customer-phone" class="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
+                        <input type="tel" id="edit-customer-phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500" required>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" id="cancel-edit-order-btn" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-md hover:bg-gray-300 transition">ยกเลิก</button>
+                    <button type="submit" class="bg-pink-600 text-white font-bold py-2 px-4 rounded-md hover:bg-pink-700 transition">บันทึก</button>
+                </div>
+             </form>
+        </div>
+    </div>
+
+    <script src="js/script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+body {
+    font-family: 'Sarabun', sans-serif;
+    background-color: #fdf2f8; /* Tailwind's pink-50 */
+}
+.modal {
+    transition: opacity 0.3s ease;
+}
+.modal-content {
+    transition: transform 0.3s ease;
+}
+/* Custom checkbox color */
+.form-checkbox:checked {
+    background-color: #9d174d; /* Tailwind's pink-800 */
+    border-color: #9d174d;
+}
+/* Custom focus ring color */
+.focus\:ring-pink-500:focus {
+    --tw-ring-color: #ec4899;
+}
+/* Marquee Animation */
+@keyframes marquee {
+    0%   { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+.animate-marquee {
+    animation: marquee 25s linear infinite;
+    padding-left: 100%; /* Start off-screen */
+    display: inline-block;
+}
